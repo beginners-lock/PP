@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, Dimensions, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, Dimensions, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { colors } from '../config/theme';
 
@@ -40,7 +40,7 @@ class LoginAcc extends Component{
         vcodeloading: false,
         emailloader: false,
         verificationwarning: '',
-        vwcolor: '',
+        vwcolor: 'black',
         fpass1: '',
         fpass2: '',
         fpass1toggle: 'Show Password',
@@ -124,7 +124,7 @@ class LoginAcc extends Component{
     }
 
     verifycode = () => {
-        this.setState({verificationwarning:'', vwcolor:''});
+        this.setState({verificationwarning:'', vwcolor:'black'});
         if(this.state.digit1===''&&this.state.digit2===''&&this.state.digit3===''&&this.state.digit4===''&&this.state.digit5===''&&this.state.digit6===''){
             this.setState({verificationwarning:'Field cannot be empty', vwcolor:'red'});
         
@@ -230,7 +230,12 @@ class LoginAcc extends Component{
     }
 
     render(){
+        if(!this.state.fontsLoaded){
+            return null;
+        }
+        
         return(
+            <SafeAreaView>
             <ScrollView ref={this.scrollViewRef} style={{ display:!this.state.loading?'flex':'none', overflowX: 'none'}} 
                 showsHorizontalScrollIndicator={false} horizontal decelerationRate={0} snapToInterval={Dimensions.get('window').width} snapToAlignment={"center"} scrollEnabled={false}>
                 <View style={{height:Dimensions.get('window').height, backgroundColor: colors[this.context.theme.mode].background}}>
@@ -293,8 +298,8 @@ class LoginAcc extends Component{
 
                 <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, flexDirection:'column', alignItems:'center', justifyContent:'flex-start', paddingTop:40, backgroundColor:colors[this.context.theme.mode].background}}>
                     <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:20, width:Dimensions.get('window').width, textAlign:'center', color:colors[this.context.theme.mode].text1}}>Confirm Email</Text>
-                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'', marginTop:10, color:colors[this.context.theme.mode].text1}}>{'Input the 6 digit code that was sent to '+(this.state.changepassvars.email?this.state.changepassvars.email:'')+'. If it is not in your inbox check your spam.'}</Text>
-                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'', color:colors[this.context.theme.mode].text1}}>The code will be invalid in 3 mins</Text>
+                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'black', marginTop:10, color:colors[this.context.theme.mode].text1}}>{'Input the 6 digit code that was sent to '+(this.state.changepassvars.email?this.state.changepassvars.email:'')+'. If it is not in your inbox check your spam.'}</Text>
+                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'black', color:colors[this.context.theme.mode].text1}}>The code will be invalid in 3 mins</Text>
                     <View style={{flexDirection:'row', justifyContent:'space-around', alignItems:'center', width:382}}>
                         <TextInput
                             ref={this.input1}
@@ -416,6 +421,7 @@ class LoginAcc extends Component{
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+            </SafeAreaView>
         );
     }
 }

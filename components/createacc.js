@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, Dimensions, ActivityIndicator, SafeAreaView } from 'react-native';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { colors } from '../config/theme';
 
@@ -74,8 +74,12 @@ class CreateAcc extends Component{
     }
 
     render(){
+        if(!this.state.fontsLoaded){
+            return null;
+        }
+
         return(
-            <View style={{height:Dimensions.get('window').height, backgroundColor:colors[this.context.theme.mode].background}}>
+            <SafeAreaView style={{height:Dimensions.get('window').height, backgroundColor:colors[this.context.theme.mode].background}}>
                 <View style={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'flex-start', marginTop:20}}>
                     <TouchableOpacity style={{marginLeft:10}} onPress={()=>{this.props.navigation.navigate('onboarding');}}>
                         <Image style={{width:24, height:24}} source={this.context.theme.mode?require('./../assets/gameback-dark.png'):require('./../assets/gameback.png')} ></Image>
@@ -141,7 +145,7 @@ class CreateAcc extends Component{
                         <ActivityIndicator style={{display:this.state.reqloading?'flex':'none'}} color="white"></ActivityIndicator>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 }

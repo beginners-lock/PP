@@ -1,5 +1,5 @@
 import { Component, useContext } from 'react';
-import { View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
+import { View, Text, Dimensions, Image, TouchableOpacity, SafeAreaView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Switch } from 'react-native-switch';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -7,6 +7,7 @@ import { colors } from '../config/theme';
 
 import * as Font from 'expo-font';
 import { customFonts } from '../config/customfonts';
+//import { SafeAreaView } from 'react-native-safe-area-context';
 
 class Settings extends Component{
     static contextType = ThemeContext
@@ -26,7 +27,7 @@ class Settings extends Component{
 
     logout = async () => {
         let action = await AsyncStorage.multiRemove(['user', 'userdata']);
-        props.navigation.navigate('first');
+        this.props.navigation.navigate('first');
         
     }
 
@@ -42,10 +43,10 @@ class Settings extends Component{
 
     render(){
         return(
-            <View style={{width:Dimensions.get('window').width, flexDirection:'column', alignItems:'center', justifyContent:'flex-start', height:Dimensions.get('window').height, backgroundColor:colors[this.context.theme.mode].background}}>
+            <SafeAreaView style={{width:Dimensions.get('window').width, flexDirection:'column', alignItems:'center', justifyContent:'flex-start', height:Dimensions.get('window').height, backgroundColor:colors[this.context.theme.mode].background}}>
                 <Text style={{width:Dimensions.get('window').width, paddingLeft:24, paddingRight:24, fontFamily:'Chakra Petch SemiBold', fontSize:24, marginTop:20, textAlign:'center', marginBottom:20, color:colors[this.context.theme.mode].text1}}>Settings</Text>
                 
-                <TouchableOpacity style={{marginTop:20,}} onPress={()=>{props.navigation.navigate('privacy');}}>
+                <TouchableOpacity style={{marginTop:20,}} onPress={()=>{this.props.navigation.navigate('privacy');}}>
                 <View style={{width:372, flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingBottom:20, borderWidth:1, borderBottomColor:'#C8D1DB', borderTopColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)'}}>
                     <View style={{flexDirection:'row', justifyContent:'flex-start', alignItems:'center'}}>
                         <Image style={{width:40, height:40}} source={this.context.theme.mode==='dark'?require('./../assets/privacy-dark.png'):require('./../assets/privacy.png')}></Image>
@@ -55,7 +56,7 @@ class Settings extends Component{
                 </View>
                 </TouchableOpacity>
     
-                <TouchableOpacity style={{marginTop:20,}} onPress={()=>{props.navigation.navigate('help');}}>
+                <TouchableOpacity style={{marginTop:20,}} onPress={()=>{this.props.navigation.navigate('help');}}>
                 <View style={{width:372, flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingBottom:20, borderWidth:1, borderBottomColor:'#C8D1DB', borderTopColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)'}}>
                     <View style={{flexDirection:'row', justifyContent:'flex-start', alignItems:'center'}}>
                         <Image style={{width:40, height:40}} source={this.context.theme.mode==='dark'?require('./../assets/help-dark.png'):require('./../assets/help.png')}></Image>
@@ -65,7 +66,7 @@ class Settings extends Component{
                 </View>
                 </TouchableOpacity>
     
-                <TouchableOpacity style={{marginTop:20,}} onPress={()=>{props.navigation.navigate('terms');}}>
+                <TouchableOpacity style={{marginTop:20,}} onPress={()=>{this.props.navigation.navigate('terms');}}>
                 <View style={{width:372, flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingBottom:20, borderWidth:1, borderBottomColor:'#C8D1DB', borderTopColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)'}}>
                     <View style={{flexDirection:'row', justifyContent:'flex-start', alignItems:'center'}}>
                         <Image style={{width:40, height:40}} source={this.context.theme.mode==='dark'?require('./../assets/terms-dark.png'):require('./../assets/terms.png')}></Image>
@@ -112,7 +113,7 @@ class Settings extends Component{
                     <Image style={{width:24, height:24}} source={this.context.theme.mode==='dark'?require('./../assets/next-dark.png'):require('./../assets/next.png')}></Image>
                 </View>
                 </TouchableOpacity>
-            </View>
+            </SafeAreaView>
         );
     }
 }

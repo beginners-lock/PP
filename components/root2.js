@@ -4,11 +4,23 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from '../contexts/ThemeContext';
 //import { colors } from '../config/theme';
 
+import * as Font from 'expo-font';
+import { customFonts } from '../config/customfonts';
+
 class Root2 extends Component{
     static contextType = ThemeContext;
+    
+    state = {
+        fontsLoaded: false,
+    }
 
-    componentDidMount(){
-        console.log(this.context);
+    async _loadFontAsync(){
+        await Font.loadAsync(customFonts);
+        this.setState({fontsLoaded: true});
+    }
+
+    async componentDidMount(){
+        this._loadFontAsync();
     }
 
     render(){
