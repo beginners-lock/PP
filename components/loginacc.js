@@ -233,41 +233,41 @@ class LoginAcc extends Component{
         return(
             <ScrollView ref={this.scrollViewRef} style={{ display:!this.state.loading?'flex':'none', overflowX: 'none'}} 
                 showsHorizontalScrollIndicator={false} horizontal decelerationRate={0} snapToInterval={Dimensions.get('window').width} snapToAlignment={"center"} scrollEnabled={false}>
-                <View style={{height:Dimensions.get('window').height, backgroundColor: colors[this.context.mode].background}}>
+                <View style={{height:Dimensions.get('window').height, backgroundColor: colors[this.context.theme.mode].background}}>
                     <View style={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'flex-start', marginTop:20}}>
                         <TouchableOpacity style={{marginLeft:10}} onPress={()=>{this.props.navigation.navigate('onboarding');}}>
-                            <Image style={{width:24, height:24}} source={this.context.mode?require('./../assets/gameback-dark.png'):require('./../assets/gameback.png')} ></Image>
+                            <Image style={{width:24, height:24}} source={this.context.theme.mode?require('./../assets/gameback-dark.png'):require('./../assets/gameback.png')} ></Image>
                         </TouchableOpacity>
-                        <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:24, marginLeft:138, color:colors[this.context.mode].text1}}>Login</Text>
+                        <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:24, marginLeft:138, color:colors[this.context.theme.mode].text1}}>Login</Text>
                     </View>
                     <View style={{width: Dimensions.get('window').width, flexDirection:'column', justifyContent:'flex-start', alignItems:'center', marginTop:40/*, borderWidth:1, borderLeftColor:'black'*/}}>
-                        <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, textAlign:'left', width:378, color:colors[this.context.mode].text1}}>Welcome Back</Text>
-                        <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, color:colors[this.context.mode].text2, textAlign:'left', width:378, marginBottom:10}}>Fill in your login details</Text>
-                        <Text style={{fontFamily:'Chakra Petch Regular', width:378, fontSize:14, color:colors[this.context.mode].text2, marginTop:10}}>New to Pacplay? 
-                            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('createacc')}}><Text style={{color:colors[this.context.mode].text3, marginLeft:5}}>Create an account</Text></TouchableOpacity></Text>
+                        <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, textAlign:'left', width:378, color:colors[this.context.theme.mode].text1}}>Welcome Back</Text>
+                        <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, color:colors[this.context.theme.mode].text2, textAlign:'left', width:378, marginBottom:10}}>Fill in your login details</Text>
+                        <Text style={{fontFamily:'Chakra Petch Regular', width:378, fontSize:14, color:colors[this.context.theme.mode].text2, marginTop:10}}>New to Pacplay? 
+                            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('createacc')}}><Text style={{color:colors[this.context.theme.mode].text3, marginLeft:5}}>Create an account</Text></TouchableOpacity></Text>
 
                         <View style={{marginTop:20}}>
-                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, color:colors[this.context.mode].inputlabel1}}>Username</Text>
+                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, color:colors[this.context.theme.mode].inputlabel1}}>Username</Text>
                             <View style={{marginTop:10, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:378, flexWrap:'wrap'}}>
                                 <TextInput
                                     placeholder={'Username'}
                                     value={this.state.username}
                                     onChangeText={(e)=>{this.setState({username: e});}}
-                                    style={{outlineStyle:'none', width:378, borderRadius:8, height:44, borderWidth:1, borderColor:colors[this.context.mode].inputborder1, fontSize:18, fontFamily:'Chakra Petch Regular', paddingLeft:15, paddingRight:15, color:colors[this.context.mode].text1}}
+                                    style={{/*outlineStyle:'none',*/ width:378, borderRadius:8, height:44, borderWidth:1, borderColor:colors[this.context.theme.mode].inputborder1, fontSize:18, fontFamily:'Chakra Petch Regular', paddingLeft:15, paddingRight:15, color:colors[this.context.theme.mode].text1}}
                                 />
                             </View>
                             <Text style={{color:'red', fontFamily:'Chakra Petch Regular', fontSize:16, marginTop:5}}>{this.state.usernamewarning}</Text>
                         </View>
 
                         <View style={{marginTop:20}}>
-                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, color:colors[this.context.mode].inputlabel1}}>Password</Text>
-                            <View style={{marginTop:10, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:378, flexWrap:'wrap', borderWidth:1, borderColor:colors[this.context.mode].inputborder1, borderRadius:8, paddingRight:15 }}>
+                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, color:colors[this.context.theme.mode].inputlabel1}}>Password</Text>
+                            <View style={{marginTop:10, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:378, flexWrap:'wrap', borderWidth:1, borderColor:colors[this.context.theme.mode].inputborder1, borderRadius:8, paddingRight:15 }}>
                                 <TextInput
                                     secureTextEntry={this.state.pass1toggle==='Hide Password'?false:true}
                                     placeholder={'Password'}
                                     value={ this.state.password }
                                     onChangeText={(e)=>{this.setState({password: e});}}
-                                    style={{outlineStyle:'none', width:260, height:44, borderWidth:1, borderColor:'rgba(0,0,0,0)', fontSize:18, fontFamily:'Chakra Petch Regular', paddingLeft:15, paddingRight:15, color:colors[this.context.mode].text1}}
+                                    style={{/*outlineStyle:'none',*/ width:260, height:44, borderWidth:1, borderColor:'rgba(0,0,0,0)', fontSize:18, fontFamily:'Chakra Petch Regular', paddingLeft:15, paddingRight:15, color:colors[this.context.theme.mode].text1}}
                                 />
                                 <TouchableOpacity  onPress={()=>{ this.setState({pass1toggle: this.state.pass1toggle==='Show Password'?'Hide Password':'Show Password'}); }}>
                                     <Text style={{fontFamily:'Chakra Petch Regular', fontSize:14, color:'#4285F4'}}>{this.state.pass1toggle}</Text>
@@ -278,23 +278,23 @@ class LoginAcc extends Component{
 
                         <View style={{flexDirection:'row', alignItems:'center', justifyContent:'flex-end', width:378, marginTop:20}}>
                             <TouchableOpacity onPress={()=>{this.forgotpassword();}}>
-                            <Text style={{textAlign:'right', fontFamily:'Chakra Petch Regular', fontSize:14, color:colors[this.context.mode].text3}}>Forgot password?</Text>
+                            <Text style={{textAlign:'right', fontFamily:'Chakra Petch Regular', fontSize:14, color:colors[this.context.theme.mode].text3}}>Forgot password?</Text>
                             </TouchableOpacity>
                         </View>
                         <Text style={{color:'red', fontFamily:'Chakra Petch Regular', fontSize:16, marginTop:35}}>{this.state.processwarning}</Text>
 
 
-                        <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:90, backgroundColor:colors[this.context.mode].btn1}} onPress={()=>{this.loginaccount();}}>
+                        <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:90, backgroundColor:colors[this.context.theme.mode].btn1}} onPress={()=>{this.loginaccount();}}>
                             <Text style={{display:!this.state.reqloading?'flex':'none', color:'white', fontFamily:'Chakra Petch Regular', fontSize:16}}>Login</Text>
                             <ActivityIndicator style={{display:this.state.reqloading?'flex':'none'}} color="white"></ActivityIndicator>
                         </TouchableOpacity>
                     </View>
                 </View>
 
-                <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, flexDirection:'column', alignItems:'center', justifyContent:'flex-start', paddingTop:40, backgroundColor:colors[this.context.mode].background}}>
-                    <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:20, width:Dimensions.get('window').width, textAlign:'center', color:colors[this.context.mode].text1}}>Confirm Email</Text>
-                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'', marginTop:10, color:colors[this.context.mode].text1}}>{'Input the 6 digit code that was sent to '+(this.state.changepassvars.email?this.state.changepassvars.email:'')+'. If it is not in your inbox check your spam.'}</Text>
-                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'', color:colors[this.context.mode].text1}}>The code will be invalid in 3 mins</Text>
+                <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, flexDirection:'column', alignItems:'center', justifyContent:'flex-start', paddingTop:40, backgroundColor:colors[this.context.theme.mode].background}}>
+                    <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:20, width:Dimensions.get('window').width, textAlign:'center', color:colors[this.context.theme.mode].text1}}>Confirm Email</Text>
+                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'', marginTop:10, color:colors[this.context.theme.mode].text1}}>{'Input the 6 digit code that was sent to '+(this.state.changepassvars.email?this.state.changepassvars.email:'')+'. If it is not in your inbox check your spam.'}</Text>
+                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'', color:colors[this.context.theme.mode].text1}}>The code will be invalid in 3 mins</Text>
                     <View style={{flexDirection:'row', justifyContent:'space-around', alignItems:'center', width:382}}>
                         <TextInput
                             ref={this.input1}
@@ -302,7 +302,7 @@ class LoginAcc extends Component{
                             value={this.state.digit1}
                             keyboardType={'numeric'}
                             onChangeText={ (e)=>{ if(e===''){ this.setState({digit1:e}); }else{ if(this.state.digit1!==''){ this.setState({digit1: e[1]}); }else{ this.setState({digit1: e[0]});  } this.input2.current.focus(); } } }
-                            style={{outlineStyle:'none', width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.mode].text1}}
+                            style={{/*outlineStyle:'none',*/ width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.theme.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.theme.mode].text1}}
                         />
 
                         <TextInput
@@ -311,7 +311,7 @@ class LoginAcc extends Component{
                             value={this.state.digit2}
                             keyboardType={'numeric'}
                             onChangeText={ (e)=>{ if(e===''){ this.setState({digit2:e}); }else{ if(this.state.digit2!==''){ this.setState({digit2: e[1]}); }else{ this.setState({digit2: e[0]});  } this.input3.current.focus(); } } }
-                            style={{outlineStyle:'none', width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.mode].text1}}
+                            style={{/*outlineStyle:'none',*/ width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.theme.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.theme.mode].text1}}
                         />
 
                         <TextInput
@@ -320,7 +320,7 @@ class LoginAcc extends Component{
                             value={this.state.digit3}
                             keyboardType={'numeric'}
                             onChangeText={ (e)=>{ if(e===''){ this.setState({digit3:e}); }else{ if(this.state.digit3!==''){ this.setState({digit3: e[1]}); }else{ this.setState({digit3: e[0]});  } this.input4.current.focus(); } } }
-                            style={{outlineStyle:'none', width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.mode].text1}}
+                            style={{/*outlineStyle:'none',*/ width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.theme.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.theme.mode].text1}}
                         />
 
                         <TextInput
@@ -329,7 +329,7 @@ class LoginAcc extends Component{
                             value={this.state.digit4}
                             keyboardType={'numeric'}
                             onChangeText={ (e)=>{ if(e===''){ this.setState({digit4:e}); }else{ if(this.state.digit4!==''){ this.setState({digit4: e[1]}); }else{ this.setState({digit4: e[0]});  } this.input5.current.focus(); } } }
-                            style={{outlineStyle:'none', width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.mode].text1}}
+                            style={{/*outlineStyle:'none',*/ width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.theme.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.theme.mode].text1}}
                         />
 
                         <TextInput
@@ -338,7 +338,7 @@ class LoginAcc extends Component{
                             value={this.state.digit5}
                             keyboardType={'numeric'}
                             onChangeText={ (e)=>{ if(e===''){ this.setState({digit5:e}); }else{ if(this.state.digit5!==''){ this.setState({digit5: e[1]}); }else{ this.setState({digit5: e[0]});  } this.input6.current.focus(); } } }
-                            style={{outlineStyle:'none', width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.mode].text1}}
+                            style={{/*outlineStyle:'none',*/ width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.theme.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.theme.mode].text1}}
                         />
 
                         <TextInput
@@ -347,42 +347,42 @@ class LoginAcc extends Component{
                             value={this.state.digit6}
                             keyboardType={'numeric'}
                             onChangeText={ (e)=>{ if(e===''){ this.setState({digit6:e}); }else{ if(this.state.digit6!==''){this.setState({digit6: e[1]});}else{this.setState({digit6: e[0]});} } } }
-                            style={{outlineStyle:'none', width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.mode].text1}}
+                            style={{/*outlineStyle:'none',*/ width:60, height:50, fontSize:30, fontFamily:'Chakra Petch SemiBold', textAlign:'center', borderWidth:2, borderBottomColor:colors[this.context.theme.mode].text1, borderTopColor:'rgba(0,0,0,0)', borderLeftColor:'rgba(0,0,0,0)', borderRightColor:'rgba(0,0,0,0)', color:colors[this.context.theme.mode].text1}}
                         />
                     </View>
 
                     <Text style={{marginTop:10, width:382, textAlign:'center', fontFamily:'Chakra Petch Regular', fontSize:16, color:this.state.vwcolor}}>{this.state.verificationwarning}</Text>
 
                     <View style={{flexDirection:'column', alignItems:'center', justifyContent:'flex-start', marginTop:120}}>
-                        <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:20, backgroundColor:colors[this.context.mode].btn1}} onPress={()=>{!this.state.vcodeloading?this.verifycode():'';}}>
+                        <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:20, backgroundColor:colors[this.context.theme.mode].btn1}} onPress={()=>{!this.state.vcodeloading?this.verifycode():'';}}>
                             <Text style={{display:!this.state.vcodeloading?'flex':'none', color:'white', fontFamily:'Chakra Petch Regular', fontSize:16}}>Verify code</Text>
                             <ActivityIndicator style={{display:this.state.vcodeloading?'flex':'none'}} color="white"></ActivityIndicator>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:20, backgroundColor:colors[this.context.mode].btn1}} onPress={()=>{!this.state.emailloader?this.resendcode(this.state.changepassvars.username, this.state.changepassvars.email):'';}}>
+                        <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:20, backgroundColor:colors[this.context.theme.mode].btn1}} onPress={()=>{!this.state.emailloader?this.resendcode(this.state.changepassvars.username, this.state.changepassvars.email):'';}}>
                             <Text style={{display:!this.state.emailloader?'flex':'none', color:'white', fontFamily:'Chakra Petch Regular', fontSize:16}}>Resend code</Text>
                             <ActivityIndicator style={{display:this.state.emailloader?'flex':'none'}} color="white"></ActivityIndicator>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:20, backgroundColor:colors[this.context.mode].btn1}} onPress={()=>{this.goback();}}>
+                        <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:20, backgroundColor:colors[this.context.theme.mode].btn1}} onPress={()=>{this.goback();}}>
                             <Text style={{color:'white', fontFamily:'Chakra Petch Regular', fontSize:16}}>Go Back</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
 
 
-                <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, flexDirection:'column', alignItems:'center', justifyContent:'flex-start', paddingTop:40, backgroundColor:colors[this.context.mode].background}}>
-                    <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, textAlign:'left', width:378, color:colors[this.context.mode].text1}}>Forgot Password</Text>
+                <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, flexDirection:'column', alignItems:'center', justifyContent:'flex-start', paddingTop:40, backgroundColor:colors[this.context.theme.mode].background}}>
+                    <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, textAlign:'left', width:378, color:colors[this.context.theme.mode].text1}}>Forgot Password</Text>
 
                     <View style={{marginTop:50}}>
-                        <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, color:colors[this.context.mode].inputlabel1}}>Password</Text>
-                        <View style={{marginTop:10, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:378, flexWrap:'wrap', borderWidth:1, borderColor:colors[this.context.mode].inputborder1, borderRadius:8, paddingRight:15, color:colors[this.context.mode].text1}}>
+                        <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, color:colors[this.context.theme.mode].inputlabel1}}>Password</Text>
+                        <View style={{marginTop:10, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:378, flexWrap:'wrap', borderWidth:1, borderColor:colors[this.context.theme.mode].inputborder1, borderRadius:8, paddingRight:15, color:colors[this.context.theme.mode].text1}}>
                             <TextInput
                                 secureTextEntry={this.state.fpass1toggle==='Hide Password'?false:true}
                                 placeholder={'Password'}
                                 value={this.state.fpass1}
                                 onChangeText={(e)=>{this.setState({fpass1: e});}}
-                                style={{outlineStyle: 'none', width:260, borderRadius:8, height:44, borderWidth:1, borderColor:'rgba(0,0,0,0)', color:colors[this.context.mode].text1, fontSize:18, fontFamily:'Chakra Petch Regular', paddingLeft:15, paddingRight:15}}
+                                style={{/*outlineStyle:'none',*/ width:260, borderRadius:8, height:44, borderWidth:1, borderColor:'rgba(0,0,0,0)', color:colors[this.context.theme.mode].text1, fontSize:18, fontFamily:'Chakra Petch Regular', paddingLeft:15, paddingRight:15}}
                             />
                             <TouchableOpacity onPress={()=>{ this.setState({fpass1toggle: this.state.fpass1toggle==='Show Password'?'Hide Password':'Show Password'}); }}>
                                 <Text style={{fontFamily:'Chakra Petch Regular', fontSize:14, color:'#4285F4'}}>{this.state.fpass1toggle}</Text>
@@ -392,14 +392,14 @@ class LoginAcc extends Component{
                     </View>
 
                     <View style={{marginTop:20}}>
-                        <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, color:colors[this.context.mode].inputlabel1}}>Confirm Password</Text>
-                        <View style={{marginTop:10, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:378, flexWrap:'wrap', borderWidth:1, borderColor:colors[this.context.mode].inputborder1, borderRadius:8, paddingRight:15}}>
+                        <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, color:colors[this.context.theme.mode].inputlabel1}}>Confirm Password</Text>
+                        <View style={{marginTop:10, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:378, flexWrap:'wrap', borderWidth:1, borderColor:colors[this.context.theme.mode].inputborder1, borderRadius:8, paddingRight:15}}>
                             <TextInput
                                 secureTextEntry={this.state.fpass2toggle==='Hide Password'?false:true}
                                 placeholder={'Confirm Password'}
                                 value={this.state.fpass2}
                                 onChangeText={(e)=>{this.setState({fpass2: e});}}
-                                style={{outlineStyle:'none', width:260, borderRadius:8, height:44, borderWidth:1, borderColor:'rgba(0,0,0,0)', color:colors[this.context.mode].text1, fontSize:18, fontFamily:'Chakra Petch Regular', paddingLeft:15, paddingRight:15}}
+                                style={{/*outlineStyle:'none',*/ width:260, borderRadius:8, height:44, borderWidth:1, borderColor:'rgba(0,0,0,0)', color:colors[this.context.theme.mode].text1, fontSize:18, fontFamily:'Chakra Petch Regular', paddingLeft:15, paddingRight:15}}
                             />
                             <TouchableOpacity onPress={()=>{ this.setState({fpass2toggle: this.state.fpass2toggle==='Show Password'?'Hide Password':'Show Password'}); }}>
                                 <Text style={{fontFamily:'Chakra Petch Regular', fontSize:14, color:'#4285F4'}}>{this.state.fpass2toggle}</Text>
@@ -410,7 +410,7 @@ class LoginAcc extends Component{
                         
                     <Text style={{color:'red', fontFamily:'Chakra Petch Regular', fontSize:16, marginTop:35}}>{this.state.fprocesswarning}</Text>
 
-                    <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:90, backgroundColor:colors[this.context.mode].btn1}} onPress={()=>{!this.state.reqloading2?this.changepassword():'';}}>
+                    <TouchableOpacity style={{width:Dimensions.get('window').width-36, height:56, flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:8, marginTop:90, backgroundColor:colors[this.context.theme.mode].btn1}} onPress={()=>{!this.state.reqloading2?this.changepassword():'';}}>
                         <Text style={{display:!this.state.reqloading2?'flex':'none', color:'white', fontFamily:'Chakra Petch Regular', fontSize:16}}>Change Password</Text>
                         <ActivityIndicator style={{display:this.state.reqloading2?'flex':'none'}} color="white"></ActivityIndicator>
                     </TouchableOpacity>

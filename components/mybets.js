@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from '../contexts/ThemeContext';
 //import { colors } from '../config/theme';
 
-class Root extends Component{
+class MyBets extends Component{
     static contextType = ThemeContext;
 
     componentDidMount(){
@@ -14,7 +14,7 @@ class Root extends Component{
     render(){
         return(
             <View style={{...styles.container}}>
-                <Text style={{fontFamily:'Chakra Petch Regular'}}>Open up App.js to start working on your app!</Text>
+                <Text style={{fontFamily:'ChakraPetchRegular'}}>Open up App.js to start working on your app!</Text>
                 <StatusBar style="auto" />
             </View>
         );
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Root;
+export default MyBets;

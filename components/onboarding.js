@@ -56,22 +56,22 @@ class Onboarding extends Component{
         }
 
         return(
-            <SafeAreaView style={{width: Dimensions.get('window').width, height:Dimensions.get('window').height, backgroundColor:colors[this.context.mode].background}}>
+            <SafeAreaView style={{width: Dimensions.get('window').width, height:Dimensions.get('window').height, backgroundColor:colors[this.context.theme.mode].background}}>
                 <ActivityIndicator style={{margin:'auto', display:this.state.loading?'flex':'none'}}></ActivityIndicator>
                 <ScrollView ref={this.scrollViewRef} style={{ display:!this.state.loading?'flex':'none', overflowX: 'none', maxHeight:550}} 
                     showsHorizontalScrollIndicator={false} horizontal decelerationRate={0} snapToInterval={Dimensions.get('window').width} snapToAlignment={"center"} scrollEnabled={false}>
                     <View style={styles.gallDiv1}>
                         <View style={styles.textCont1}>
-                            <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize: 30, color:colors[this.context.mode].text1}}>Your Friends are Here!</Text>
-                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize: 14, color:colors[this.context.mode].text4}}>PacPlay, where friends stake together and win together.</Text>
+                            <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize: 30, color:colors[this.context.theme.mode].text1}}>Your Friends are Here!</Text>
+                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize: 14, color:colors[this.context.theme.mode].text4}}>PacPlay, where friends stake together and win together.</Text>
                         </View>
                         <Image style={styles.img1} source={require('./../assets/mbappeleft.png')}></Image>
                     </View>
                     <View style={styles.gallDiv2}>
                         <Image style={styles.img2} source={require('./../assets/mbapperight.png')}></Image>
                         <View style={styles.textCont2}>
-                            <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize: 30, textAlign: 'right', color:colors[this.context.mode].text1}}>"Bet, stake and celebrate with friends!"</Text>
-                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize: 14, textAlign: 'right', color:colors[this.context.mode].text4}}>Join the ultimate betting experience. Invite friends, stake bets and let the winnings flow!</Text>
+                            <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize: 30, textAlign: 'right', color:colors[this.context.theme.mode].text1}}>"Bet, stake and celebrate with friends!"</Text>
+                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize: 14, textAlign: 'right', color:colors[this.context.theme.mode].text4}}>Join the ultimate betting experience. Invite friends, stake bets and let the winnings flow!</Text>
                         </View>
                     </View>
                     <View style={styles.gallDiv3}>
@@ -80,21 +80,21 @@ class Onboarding extends Component{
                             <Image style={{width:180, height:180 }} source={require('./../assets/coinbag.png')}></Image>
                         </View>
                         <View style={styles.textCont3}>
-                            <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize: 30, textAlign: 'center', color:colors[this.context.mode].text1}}>"Double the fun, double the stakes!</Text>
-                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize: 14, textAlign: 'center', color:colors[this.context.mode].text4}}>"Turn bets into shared victories! Invite friends to join your betting circle and enjoy winning together"</Text>
+                            <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize: 30, textAlign: 'center', color:colors[this.context.theme.mode].text1}}>"Double the fun, double the stakes!</Text>
+                            <Text style={{fontFamily:'Chakra Petch Regular', fontSize: 14, textAlign: 'center', color:colors[this.context.theme.mode].text4}}>"Turn bets into shared victories! Invite friends to join your betting circle and enjoy winning together"</Text>
                         </View>
                     </View>
                 </ScrollView>
                 <View style={{width: Dimensions.get('window').width, flexDirection:'column', alignItems:'center', marginTop: 20}}>
                     <TouchableOpacity style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center', marginTop:20}} onPress={()=>{this.props.navigation.navigate('createacc');}}>
-                        <Image style={{width:240, height:41}} source={this.context.mode?require('./../assets/blackrect-dark.png'):require('./../assets/blackrect.png')}/>
+                        <Image style={{width:240, height:41}} source={this.context.theme.mode?require('./../assets/blackrect-dark.png'):require('./../assets/blackrect.png')}/>
                         <Text style={{ position:'absolute', fontFamily:'Chakra Petch Regular', color:'white'}}>
                             Create an account
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center', marginTop:15}} onPress={()=>{this.props.navigation.navigate('loginacc');}} >
-                        <Image style={{width:240, height:41}} source={this.context.mode?require('./../assets/whiterect-dark.png'):require('./../assets/whiterect.png')}/>
-                        <Text style={{ position:'absolute', fontFamily:'Chakra Petch Regular', color:colors[this.context.mode].text1}}>Login to account</Text>
+                        <Image style={{width:240, height:41}} source={this.context.theme.mode?require('./../assets/whiterect-dark.png'):require('./../assets/whiterect.png')}/>
+                        <Text style={{ position:'absolute', fontFamily:'Chakra Petch Regular', color:colors[this.context.theme.mode].text1}}>Login to account</Text>
                     </TouchableOpacity>
                     
                 </View>

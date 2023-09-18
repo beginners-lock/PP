@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from '../contexts/ThemeContext';
 //import { colors } from '../config/theme';
 
-class Root extends Component{
+class Root2 extends Component{
     static contextType = ThemeContext;
 
     componentDidMount(){
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Root;
+export default Root2;

@@ -12,58 +12,49 @@ import * as Font from 'expo-font';
 import First from './components/first';
 import LoginAcc from './components/loginacc';
 import CreateAcc from './components/createacc';
-import Root from './components/root';
+import UserStack from './navigators/userstack';
 import Onboarding from './components/onboarding';
 import { customFonts } from './config/customfonts';
 
 const Stack = createNativeStackNavigator();
 
 export default class App extends Component {
-  state={
-    fontsLoaded: false,
-    theme: {mode: "dark"}
-  }
+  constructor(props){
+    super(props);
 
-  async _loadFontAsync(){
-    await Font.loadAsync(customFonts);
-    this.setState({fontsLoaded: true});
+    this.updateTheme = (newTheme) => {
+      let mode;
+      mode = this.state.theme.mode==='dark' ? 'light' : 'dark';
+      this.setState({theme: {mode:mode} });
+      console.log(this.state);
+    }
+
+    this.state = {   
+      theme: {mode: "dark"},
+      toggleTheme: this.updateTheme
+    }
   }
 
   async componentDidMount(){
-    this._loadFontAsync();
-
     let themeMode = await AsyncStorage.getItem('PacPlayThemeMode');
+    console.log(this.state);
     if(themeMode){
-        this.setState({mode: themeMode});
-        console.log(themeMode);
+        this.setState({theme: {mode: themeMode}});
     }else{
-        this.setState({mode: 'dark'})
-        console.log('dark');
+        this.setState({theme: {mode: 'dark'}})
     }
-  }
-
-  updateTheme = (newTheme) => {
-    let mode;
-    if(!newTheme){
-      mode = this.state.theme.mode === 'dark' ? 'light' : 'dark';
-      newTheme = {mode: mode};
-    }
-    this.setState({theme: newTheme});
   }
 
   render(){
-    if(!this.state.fontsLoaded){
-      return null;
-    }
-
     return (
-      <ThemeContext.Provider value={this.state.theme}>
+      <ThemeContext.Provider value={this.state}>
         <NavigationContainer theme={this.state.theme.mode==='dark'?{dark: true, colors: {background:'#181818'}}:{dark: false, colors: {background:'white'}} }>
           <Stack.Navigator screenOptions={{headerShown: false, contentStyle: {backgroundColor: colors[this.state.theme.mode].background}}}>
             <Stack.Screen name="first" component={First}/>
             <Stack.Screen name="onboarding" component={Onboarding}/>
             <Stack.Screen name="loginacc" component={LoginAcc}/>
             <Stack.Screen name="createacc" component={CreateAcc}/>
+            <Stack.Screen name="user" component={UserStack}/>
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeContext.Provider>
