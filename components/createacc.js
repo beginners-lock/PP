@@ -44,16 +44,16 @@ class CreateAcc extends Component{
         
                     console.log(data);
                     this.setState({reqloading:true});
-                    const response = fetch(
-                        'https://ppbe01.onrender.com/creataccount',//"http://localhost:3000/createaccount",
+                    fetch(
+                        'https://ppbe01.onrender.com/createaccount',//"http://localhost:3000/createaccount",
                         {
                             method: 'POST',
                             body: JSON.stringify(data),
                             headers: { 'Content-Type': 'application/json' }
                         }  
                     ).then(response=>{
-                        return response.json();
-                    }).then(async response=>{
+                        return(response.json());
+                    }).then(async (response) => {
                         if(response.msg==='Username already exists'){
                             this.setState({usernamewarning:'Username already exists', reqloading:false});
                         }else{
