@@ -28,7 +28,6 @@ class Settings extends Component{
     logout = async () => {
         let action = await AsyncStorage.multiRemove(['user', 'userdata']);
         this.props.navigation.navigate('first');
-        
     }
 
     changeTheme = async (e) => {

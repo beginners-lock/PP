@@ -18,6 +18,8 @@
     "@react-navigation/stack": "^6.3.17",
     "expo": "~49.0.11",
     "expo-document-picker": "~11.5.4",
+    "expo-font": "~11.4.0",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -29,12 +31,21 @@
     "react-native-screens": "~3.22.0",
     "react-native-switch": "^1.5.1",
     "react-native-web": "~0.19.6",
-    "socket.io-client": "^4.7.2",
-    "expo-font": "~11.4.0",
-    "expo-splash-screen": "~0.20.5"
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@babel/plugin-transform-async-generator-functions": "^7.22.15",
+    "@babel/plugin-transform-class-properties": "^7.22.5",
+    "@babel/plugin-transform-export-namespace-from": "^7.22.11",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^7.22.11",
+    "@babel/plugin-transform-numeric-separator": "^7.22.11",
+    "@babel/plugin-transform-object-rest-spread": "^7.22.15",
+    "@babel/plugin-transform-optional-catch-binding": "^7.22.11",
+    "@babel/plugin-transform-optional-chaining": "^7.22.15",
+    "@npmcli/fs": "^3.1.0",
+    "uglify-js": "^3.17.4",
+    "uuid": "^9.0.1"
   },
   "private": true
 }

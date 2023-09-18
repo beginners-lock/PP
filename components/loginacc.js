@@ -245,7 +245,7 @@ class LoginAcc extends Component{
                         </TouchableOpacity>
                         <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:24, marginLeft:138, color:colors[this.context.theme.mode].text1}}>Login</Text>
                     </View>
-                    <View style={{width: Dimensions.get('window').width, flexDirection:'column', justifyContent:'flex-start', alignItems:'center', marginTop:40/*, borderWidth:1, borderLeftColor:'black'*/}}>
+                    <View style={{width: Dimensions.get('window').width, flexDirection:'column', justifyContent:'flex-start', alignItems:'center', marginTop:40}}>
                         <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, textAlign:'left', width:378, color:colors[this.context.theme.mode].text1}}>Welcome Back</Text>
                         <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, color:colors[this.context.theme.mode].text2, textAlign:'left', width:378, marginBottom:10}}>Fill in your login details</Text>
                         <Text style={{fontFamily:'Chakra Petch Regular', width:378, fontSize:14, color:colors[this.context.theme.mode].text2, marginTop:10}}>New to Pacplay? 
@@ -298,8 +298,8 @@ class LoginAcc extends Component{
 
                 <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, flexDirection:'column', alignItems:'center', justifyContent:'flex-start', paddingTop:40, backgroundColor:colors[this.context.theme.mode].background}}>
                     <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:20, width:Dimensions.get('window').width, textAlign:'center', color:colors[this.context.theme.mode].text1}}>Confirm Email</Text>
-                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'black', marginTop:10, color:colors[this.context.theme.mode].text1}}>{'Input the 6 digit code that was sent to '+(this.state.changepassvars.email?this.state.changepassvars.email:'')+'. If it is not in your inbox check your spam.'}</Text>
-                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:'black', color:colors[this.context.theme.mode].text1}}>The code will be invalid in 3 mins</Text>
+                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', marginTop:10, color:colors[this.context.theme.mode].text1}}>{'Input the 6 digit code that was sent to '+(this.state.changepassvars.email?this.state.changepassvars.email:'')+'. If it is not in your inbox check your spam.'}</Text>
+                    <Text style={{fontFamily:'Chakra Petch Regular', fontSize:16, width:356, textAlign:'center', color:colors[this.context.theme.mode].text1}}>The code will be invalid in 3 mins</Text>
                     <View style={{flexDirection:'row', justifyContent:'space-around', alignItems:'center', width:382}}>
                         <TextInput
                             ref={this.input1}

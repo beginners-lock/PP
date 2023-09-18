@@ -86,7 +86,7 @@ class CreateAcc extends Component{
                     </TouchableOpacity>
                     <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:24, marginLeft:68, color:colors[this.context.theme.mode].text1}}>Create an account</Text>
                 </View>
-                <View style={{width: Dimensions.get('window').width, flexDirection:'column', justifyContent:'flex-start', alignItems:'center', marginTop:40/*, borderWidth:1, borderLeftColor:'black'*/}}>
+                <View style={{width: Dimensions.get('window').width, flexDirection:'column', justifyContent:'flex-start', alignItems:'center', marginTop:40}}>
                     <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, textAlign:'left', width:378, color:colors[this.context.theme.mode].text1}}>Your friends are here,</Text>
                     <Text style={{fontFamily:'Chakra Petch SemiBold', fontSize:22, color:colors[this.context.theme.mode].text2, textAlign:'left', width:378, marginBottom:10}}>Let's get you started!</Text>
                     <Text style={{fontFamily:'Chakra Petch Regular', width:378, fontSize:14, color:colors[this.context.theme.mode].text2, marginTop:10}}>Already have an account? 
