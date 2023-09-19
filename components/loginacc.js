@@ -71,25 +71,29 @@ class LoginAcc extends Component{
 
                 console.log(data);
                 this.setState({reqloading: true});
-                const response = fetch(
-                    'https://ppbe01.onrender.com/loginaccount',//"http://localhost:3000/loginaccount",
-                    {
-                        method: 'POST',
-                        body: JSON.stringify(data),
-                        headers: { 'Content-Type': 'application/json' }
-                    }  
-                ).then(response=>{
-                    return response.json();
-                }).then(async response=>{
-                    if(response.msg==='200'){
-                        await AsyncStorage.setItem('userdata', JSON.stringify(response.data));
-                        console.log(response.data);
-                        this.props.navigation.navigate('user');
-                        this.setState({reqloading: false});
-                    }else{
-                        this.setState({usernamewarning:response.msg, passwordwarning:response.msg, reqloading: false});
-                    }
-                });
+                try{
+                    fetch(
+                        'https://ppbe01.onrender.com/loginaccount',//"http://localhost:3000/loginaccount",
+                        {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: { 'Content-Type': 'application/json' }
+                        }  
+                    ).then(response=>{
+                        return response.json();
+                    }).then(async response=>{
+                        if(response.msg==='200'){
+                            await AsyncStorage.setItem('userdata', JSON.stringify(response.data));
+                            console.log(response.data);
+                            //this.props.navigation.navigate('user');
+                            this.setState({reqloading: false});
+                        }else{
+                            this.setState({usernamewarning:response.msg, passwordwarning:response.msg, reqloading: false});
+                        }
+                    });
+                }catch(e){
+                    this.setState({reqloading: false, processwarning:'Could not process request, server might be down.'});
+                }
             }else{
                 if(this.state.username===''){ this.setState({usernamewarning:'This field cannot be empty'}); } 
                 if(this.state.password===''){ this.setState({passwordwarning:'This field cannot be empty'}); }
@@ -102,24 +106,29 @@ class LoginAcc extends Component{
             this.setState({usernamewarning:'This field has to be provided for a password change', passwordwarning:''});
         }else{
             this.setState({usernamewarning:'', processwarning:'', reqloading:true});
-            fetch(
-                'https://ppbe01.onrender.com/passwordchangepossible',//"http://localhost:3000/passwordchangepossible",
-                {
-                    method: 'POST',
-                    body: JSON.stringify({ username: this.state.username }),
-                    headers: { 'Content-Type': 'application/json' }
-                }  
-            ).then(response=>{
-                return response.json();
-            }).then(async response=>{
-                if(response.msg==='success'){
-                    this.resendcode(response.data.username, response.data.email);
-                    this.setState({changepassvars: response.data, reqloading:false});
-                    this.scrollViewRef.current?.scrollTo({ x: Dimensions.get('window').width*1, animated: true});
-                }else{
-                    this.setState({processwarning: response.msg, reqloading: false})
-                }
-            })
+            
+            try{
+                fetch(
+                    'https://ppbe01.onrender.com/passwordchangepossible',//"http://localhost:3000/passwordchangepossible",
+                    {
+                        method: 'POST',
+                        body: JSON.stringify({ username: this.state.username }),
+                        headers: { 'Content-Type': 'application/json' }
+                    }  
+                ).then(response=>{
+                    return response.json();
+                }).then(async response=>{
+                    if(response.msg==='success'){
+                        this.resendcode(response.data.username, response.data.email);
+                        this.setState({changepassvars: response.data, reqloading:false});
+                        this.scrollViewRef.current?.scrollTo({ x: Dimensions.get('window').width*1, animated: true});
+                    }else{
+                        this.setState({processwarning: response.msg, reqloading: false})
+                    }
+                });
+            }catch(e){
+                this.setState({reqloading:false, processwarning:'Could not process request, server might be down.'});
+            }
         }
     }
 
@@ -139,25 +148,29 @@ class LoginAcc extends Component{
                     username:this.state.changepassvars.username, 
                     email:this.state.changepassvars.email, code:code};
 
-                const response = fetch(
-                    'https://ppbe01.onrender.com/passwordverifyemail',//"http://localhost:3000/passwordverifyemail",
-                    {
-                        method: 'POST',
-                        body: JSON.stringify(data),
-                        headers: { 'Content-Type': 'application/json' }
-                    }  
-                ).then(response=>{
-                    return response.json();
-                }).then(async response=>{
+                try{
+                    fetch(
+                        'https://ppbe01.onrender.com/passwordverifyemail',//"http://localhost:3000/passwordverifyemail",
+                        {
+                            method: 'POST',
+                            body: JSON.stringify(data),
+                            headers: { 'Content-Type': 'application/json' }
+                        }  
+                    ).then(response=>{
+                        return response.json();
+                    }).then(async response=>{
 
-                    this.setState({vcodeloading:false, verificationwarning:response.msg});
-                    if(response.msg==='Email verified'){  
-                        this.setState({vwcolor:'green'});
-                        this.scrollViewRef.current?.scrollTo({ x: Dimensions.get('window').width*2, animated: true});
-                    }else{
-                        this.setState({vwcolor:'red'});
-                    }
-                });
+                        this.setState({vcodeloading:false, verificationwarning:response.msg});
+                        if(response.msg==='Email verified'){  
+                            this.setState({vwcolor:'green'});
+                            this.scrollViewRef.current?.scrollTo({ x: Dimensions.get('window').width*2, animated: true});
+                        }else{
+                            this.setState({vwcolor:'red'});
+                        }
+                    });
+                }catch(e){
+                    this.setState({vcodeloading:false, verificationwarning:'Could not process request, server might be down', vwcolor:'red'});
+                }
             }
         }
     }
@@ -165,24 +178,29 @@ class LoginAcc extends Component{
     resendcode = (username, email) => {
         if(email && email!==''){
             this.setState({emailloader: true, processwarning:''});
-            const response = fetch(
-                'https://ppbe01.onrender.com/sendemailcode',//"http://localhost:3000/sendemailcode",
-                {
-                    method: 'POST',
-                    body: JSON.stringify({username: username, email: email}),
-                    headers: { 'Content-Type': 'application/json' }
-                }  
-            ).then(response=>{
-                return response.json();
-            }).then(async response=>{
-                console.log(response.msg);
-                this.setState({emailloader:false});
-                if(response.msg==='A code has been sent to this email'){  
-                    this.setState({verificationwarning:response.msg, vwcolor: 'green'});
-                }else{
-                    this.setState({verificationwarning:response.msg, vwcolor: 'red'});
-                }
-            });
+            
+            try{
+                fetch(
+                    'https://ppbe01.onrender.com/sendemailcode',//"http://localhost:3000/sendemailcode",
+                    {
+                        method: 'POST',
+                        body: JSON.stringify({username: username, email: email}),
+                        headers: { 'Content-Type': 'application/json' }
+                    }  
+                ).then(response=>{
+                    return response.json();
+                }).then(async response=>{
+                    console.log(response.msg);
+                    this.setState({emailloader:false});
+                    if(response.msg==='A code has been sent to this email'){  
+                        this.setState({verificationwarning:response.msg, vwcolor: 'green'});
+                    }else{
+                        this.setState({verificationwarning:response.msg, vwcolor: 'red'});
+                    }
+                });
+            }catch(e){
+                this.setState({verificationwarning:'Could not process request, server might be down', vwcolor: 'red'});
+            }
         }else{  	
             this.goback();
         }
@@ -208,24 +226,29 @@ class LoginAcc extends Component{
             }
         }else{
             this.setState({reqloading2: true});
-            fetch(
-                'https://ppbe01.onrender.com/forgotpassword',//"http://localhost:3000/forgotpassword",
-                {
-                    method: 'POST',
-                    body: JSON.stringify({password: this.state.fpass1, username:this.state.changepassvars.username, email:this.state.changepassvars.email}),
-                    headers: { 'Content-Type': 'application/json' }
-                }  
-            ).then(response=>{
-                return response.json();
-            }).then(async response=>{
-                if(response.msg === 'success'){
-                    this.goback();
-                }else{
-                    this.setState({fprocesswarning: response.msg});
-                }
 
-                this.setState({reqloading2: false});
-            });
+            try{
+                fetch(
+                    'https://ppbe01.onrender.com/forgotpassword',//"http://localhost:3000/forgotpassword",
+                    {
+                        method: 'POST',
+                        body: JSON.stringify({password: this.state.fpass1, username:this.state.changepassvars.username, email:this.state.changepassvars.email}),
+                        headers: { 'Content-Type': 'application/json' }
+                    }  
+                ).then(response=>{
+                    return response.json();
+                }).then(async response=>{
+                    if(response.msg === 'success'){
+                        this.goback();
+                    }else{
+                        this.setState({fprocesswarning: response.msg});
+                    }
+    
+                    this.setState({reqloading2: false});
+                });
+            }catch(e){
+                this.setState({reqloading2: false, fprocesswarning: 'Could not process request, server might be down.'});
+            }
         }
     }
 

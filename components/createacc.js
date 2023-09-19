@@ -44,24 +44,28 @@ class CreateAcc extends Component{
         
                     console.log(data);
                     this.setState({reqloading:true});
-                    fetch(
-                        'https://ppbe01.onrender.com/createaccount',//"http://localhost:3000/createaccount",
-                        {
-                            method: 'POST',
-                            body: JSON.stringify(data),
-                            headers: { 'Content-Type': 'application/json' }
-                        }  
-                    ).then(response=>{
-                        return(response.json());
-                    }).then(async (response) => {
-                        if(response.msg==='Username already exists'){
-                            this.setState({usernamewarning:'Username already exists', reqloading:false});
-                        }else{
-                            await AsyncStorage.setItem('userdata', JSON.stringify(response.data));
-                            this.props.navigation.navigate('user');
-                            this.setState({reqloading:false});
-                        }
-                    });
+                    try{
+                        fetch(
+                            'https://ppbe01.onrender.com/createaccount',//"http://localhost:3000/createaccount",
+                            {
+                                method: 'POST',
+                                body: JSON.stringify(data),
+                                headers: { 'Content-Type': 'application/json' }
+                            }  
+                        ).then(response=>{
+                            return(response.json());
+                        }).then(async (response) => {
+                            if(response.msg==='Username already exists'){
+                                this.setState({usernamewarning:'Username already exists', reqloading:false});
+                            }else{
+                                await AsyncStorage.setItem('userdata', JSON.stringify(response.data));
+                                //this.props.navigation.navigate('user');
+                                this.setState({reqloading:false});
+                            }
+                        });
+                    }catch(e){
+                        this.setState({reqloading:false})
+                    }
                 }else{
                     this.setState({pass1warning:'Passwords not similar', pass2warning:'Passwords not similar'});
                 }

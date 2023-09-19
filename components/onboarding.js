@@ -29,11 +29,15 @@ class Onboarding extends Component{
 
     async componentDidMount(){
         this._loadFontAsync();
-        this.timer = setInterval(()=>{
-            let page = this.state.page<=1 ? this.state.page+1 : 0; 
-            this.scrollViewRef.current?.scrollTo({ x: Dimensions.get('window').width * page, animated: true});
-            this.setState({page: page});
-        }, 5000);
+        try{
+            this.timer = setInterval(()=>{
+                let page = this.state.page<=1 ? this.state.page+1 : 0; 
+                this.scrollViewRef.current?.scrollTo({ x: Dimensions.get('window').width * page, animated: true});
+                this.setState({page: page});
+            }, 5000);
+        }catch(e){
+            console.log(e);
+        }
     }
 
     navigate = async (response) => {
