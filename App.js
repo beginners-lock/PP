@@ -21,7 +21,7 @@ export default function App(){
 	const Stack = createNativeStackNavigator();
 	const [theme, setTheme] = useState({mode: "dark"});
   
-	useEffect(()=>{
+	/*useEffect(()=>{
 		async function themeChecker(){
 			let themeMode = await AsyncStorage.getItem('PacPlayThemeMode');
 			if(themeMode){
@@ -33,7 +33,7 @@ export default function App(){
 		}
 		themeChecker();
   
-	}, [setTheme]);
+	}, [setTheme]);*/
   
 	const updateTheme = (newTheme) => {
 		let mode;
@@ -46,16 +46,22 @@ export default function App(){
 
 	return(
 		<ThemeContext.Provider value={{theme, updateTheme}}>
-        	<NavigationContainer theme={theme.mode==='dark'?{dark: true, colors: {background:'#181818'}}:{dark: false, colors: {background:'white'}} }>
-				<Stack.Navigator screenOptions={{headerShown: false, contentStyle: {backgroundColor: colors[theme.mode].background}}}>
+        	<NavigationContainer>
+				<Stack.Navigator screenOptions={{headerShown: false}}>
 					<Stack.Screen name="first" component={First}/>
 					<Stack.Screen name="onboarding" component={Onboarding}/>
 					<Stack.Screen name="loginacc" component={LoginAcc}/>
 					<Stack.Screen name="createacc" component={CreateAcc}/>
-					<Stack.Screen name="usertabs" component={UserTabs}/>
 					<Stack.Screen name="profile" component={Profile}/>
 				</Stack.Navigator>
         	</NavigationContainer>
       	</ThemeContext.Provider>
 	);
 }
+
+/* 
+	
+					<Stack.Screen name="usertabs" component={UserTabs}/>
+					 theme={theme.mode==='dark'?{dark: true, colors: {background:'#181818'}}:{dark: false, colors: {background:'white'}} }
+					, contentStyle: {backgroundColor: colors[theme.mode].background}}
+*/
