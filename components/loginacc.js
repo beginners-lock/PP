@@ -7,6 +7,9 @@ export default function LoginAcc(props){
             <TouchableOpacity onPress={()=>{props.navigation.navigate('createacc');}}>
                 <Text>Go to CreateAcc</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={()=>{props.navigation.navigate('usertabs');}}>
+                <Text>Go to Home</Text>
+            </TouchableOpacity>
         </View>
     );
 }
