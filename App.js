@@ -1,7 +1,4 @@
-import 'react-native-gesture-handler';
-
-import registerRootComponent from 'expo/build/launch/registerRootComponent';
-
+//import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState, useEffect } from 'react';
@@ -20,7 +17,7 @@ import Profile from './components/profile';
 
 const Stack = createNativeStackNavigator();
 
-function App(){
+export default function App(){
 	const Stack = createNativeStackNavigator();
 	const [theme, setTheme] = useState({mode: "dark"});
   
@@ -61,8 +58,6 @@ function App(){
       	</ThemeContext.Provider>
 	);
 }
-
-registerRootComponent(App);
 
 /* 
 	
