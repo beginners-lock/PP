@@ -1,66 +1,61 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import React, {Component} from 'react';
+import { useState, useEffect } from 'react';
 
 import { ThemeContext } from './contexts/ThemeContext';
 import { colors } from './config/theme';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import UserTabs from './navigators/usertabs';
+
 import First from './components/first';
+import Onboarding from './components/onboarding';
 import LoginAcc from './components/loginacc';
 import CreateAcc from './components/createacc';
-import UserStack from './navigators/userstack';
-import Onboarding from './components/onboarding';
+import Profile from './components/profile';
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
-export default class App extends Component {
-  constructor(props){
-    super(props);
+export default function App(){
+	const Stack = createNativeStackNavigator();
+	const [theme, setTheme] = useState({mode: "dark"});
+  
+	useEffect(()=>{
+		async function themeChecker(){
+			let themeMode = await AsyncStorage.getItem('PacPlayThemeMode');
+			if(themeMode){
+				setTheme({mode: themeMode});
+			}else{
+				setTheme({mode: 'light'})
+			}
+			
+		}
+		themeChecker();
+  
+	}, [setTheme]);
+  
+	const updateTheme = (newTheme) => {
+		let mode;
+		if(!newTheme){
+			mode = theme.mode === 'dark' ? 'light' : 'dark';
+			newTheme = {mode};
+		}
+		setTheme(newTheme);
+	}
 
-    this.updateTheme = (newTheme) => {
-      let mode;
-      mode = this.state.theme.mode==='dark' ? 'light' : 'dark';
-      this.setState({theme: {mode:mode} });
-      console.log(this.state);
-    }
-
-    this.state = {   
-      theme: {mode: "dark"},
-      toggleTheme: this.updateTheme
-    }
-  }
-
-  async componentDidMount(){
-    let themeMode = await AsyncStorage.getItem('PacPlayThemeMode');
-    console.log(this.state);
-    if(themeMode){
-        this.setState({theme: {mode: themeMode}});
-    }else{
-        this.setState({theme: {mode: 'dark'}})
-    }
-  }
-
-  render(){
-    return (
-      	<ThemeContext.Provider value={this.state}>
-        	<NavigationContainer theme={this.state.theme.mode==='dark'?{dark: true, colors: {background:'#181818'}}:{dark: false, colors: {background:'white'}} }>
-          		<Stack.Navigator screenOptions={{headerShown: false, contentStyle: {backgroundColor: colors[this.state.theme.mode].background}}}>
-            		<Stack.Screen name="first" component={First}/>
-            		<Stack.Screen name="onboarding" component={Onboarding}/>
-            		<Stack.Screen name="loginacc" component={LoginAcc}/>
-            		<Stack.Screen name="createacc" component={CreateAcc}/>
-          		</Stack.Navigator>
+	return(
+		<ThemeContext.Provider value={{theme, updateTheme}}>
+        	<NavigationContainer theme={theme.mode==='dark'?{dark: true, colors: {background:'#181818'}}:{dark: false, colors: {background:'white'}} }>
+				<Stack.Navigator screenOptions={{headerShown: false, contentStyle: {backgroundColor: colors[theme.mode].background}}}>
+					<Stack.Screen name="first" component={First}/>
+					<Stack.Screen name="onboarding" component={Onboarding}/>
+					<Stack.Screen name="loginacc" component={LoginAcc}/>
+					<Stack.Screen name="createacc" component={CreateAcc}/>
+					<Stack.Screen name="usertabs" component={UserTabs}/>
+					<Stack.Screen name="profile" component={Profile}/>
+				</Stack.Navigator>
         	</NavigationContainer>
       	</ThemeContext.Provider>
-    );
-  }
+	);
 }
-
-/*
-	<Stack.Screen name="user" component={UserStack}/>
-*/

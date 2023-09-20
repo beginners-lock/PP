@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "PP",
-    "slug": "PP",
+    "slug": "pp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "a959a337-2242-4de8-8038-bbae774f9e85"
+        "projectId": "d3ab744f-29e3-44d6-a8c1-629a202b35f8"
       }
-    }
+    },
+    "owner": "rc2"
   }
 }

@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 
-export default function First(props){
+export default function Profile(props){
     return(
         <View style={{flex:1, flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
-            <Text>First</Text>
-            <TouchableOpacity onPress={()=>{props.navigation.navigate('onboarding');}}>
-                <Text>Go to Onboarding</Text>
+            <Text>Profile</Text>
+            <TouchableOpacity onPress={()=>{props.navigation.navigate('home');}}>
+                <Text>Go to Home</Text>
             </TouchableOpacity>
         </View>
     );
